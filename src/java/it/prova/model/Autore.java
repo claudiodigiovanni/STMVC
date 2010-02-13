@@ -2,6 +2,7 @@ package it.prova.model;
 
 import it.prova.util.HibernateUtil;
 
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -125,6 +126,12 @@ public class Autore {
 		BindingResult errors = new BeanPropertyBindingResult(this, "autore");
 		validator.validate(this, errors);
 		domainErrors = errors.getAllErrors();
+		
+		Autore a1 = new Autore();
+		a1.setCognome("zzzz");
+		a1.setNome("ssss");
+		//invokeJpaMethod("save", null);
+		//a1.save();
 		return (domainErrors.isEmpty());
 		//errors.rejectValue("nome", "error.nome", "msgdefault");
 		//errors.rejectValue("nome", "error.nome");
@@ -148,5 +155,24 @@ public class Autore {
 		return (Autore) HibernateUtil.sessionFactory().getCurrentSession().get(
 				Autore.class, id);
 	}
+	
+	//Save - Delete - Merge
+	//get vuole id
+	public void invokeJpaMethod(String methodName, Object[] params){
+		
+		try {
+			//Method m = this.getClass().getMethod(methodName,null);
+			//Object ret = m.invoke(this);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Object ret = m.
+		
+	}
+	
 
 }
