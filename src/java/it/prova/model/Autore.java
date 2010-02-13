@@ -121,25 +121,24 @@ public class Autore {
 	}
 
 	public boolean validate() {
-		
-		System.out
-				.println("...............validate di Autore xx...................");
+	
 		BindingResult errors = new BeanPropertyBindingResult(this, "autore");
 		validator.validate(this, errors);
-		
+		domainErrors = errors.getAllErrors();
+		return (domainErrors.isEmpty());
 		//errors.rejectValue("nome", "error.nome", "msgdefault");
 		//errors.rejectValue("nome", "error.nome");
 		//System.out.println(errors.getMessage());
-		domainErrors = errors.getAllErrors();
-		System.out.println("errors:" + domainErrors);
+		
+	/*	System.out.println("errors:" + domainErrors);
 		for (ObjectError e : domainErrors) {
 			System.out.println("getDefaultMessage:" + e.getDefaultMessage());
 			System.out.println("getCode:" + e.getCode());
 
 			// System.out.println("errore:" + e.);
-		}
+		}*/
 
-		return (domainErrors.isEmpty());
+
 
 	}
 
