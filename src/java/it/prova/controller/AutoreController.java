@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,17 +38,18 @@ public class AutoreController {
 	 */
 
 	@RequestMapping("/updateUtente.dispatch")
-	public ModelAndView update(@RequestParam("id") Long id,
-			HttpServletRequest request) {
+	public ModelAndView update(@RequestParam("id") Long id,HttpServletRequest request) {
 
 		// Autore a = new Autore(id);
 		// Session s = sessionFactory.getCurrentSession();
 		// Autore a = (Autore)s.get(Autore.class, id);
 		// BindingResult res = DataBindingUtils.bindObjectToInstance(a,
 		// request);
-		Autore a = Autore.get(1L);
+		Autore a = Autore.create();
+		//Autore a = Autore.get(1L);
 		MyUtils.bindDataFromMap(a, request);
 		a.validate();
+		
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/autore/edit");

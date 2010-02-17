@@ -23,21 +23,29 @@ import javax.validation.constraints.Size;
 
 import org.codehaus.groovy.grails.commons.ApplicationHolder;
 import org.codehaus.groovy.grails.commons.spring.GrailsApplicationContext;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
+@Component 
+@Scope("prototype")
 @Entity
 public class Autore {
+	
+
 
 	private Long id;
 	private Long version;
 
 	@Autowired
-	private Validator validator;
+	private Validator validator; 
 
 	@Transient
 	private List<ObjectError> domainErrors;
@@ -171,6 +179,14 @@ public class Autore {
 			e.printStackTrace();
 		}
 		//Object ret = m.
+		
+	}
+	
+	
+	public static Autore create(){
+		
+		ApplicationContext ctx = ApplicationHolder.getApplication().getMainContext();
+		return (Autore)ctx.getBean("autore");
 		
 	}
 	
